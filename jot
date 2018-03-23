@@ -24,7 +24,8 @@ if [ ! -d $DIR ]; then
 fi
 
 # Pull recent changes, if any
-`aws s3 sync s3://$BUCKET $DIR`
+# Commented out until we solve the overwriting problem
+# aws s3 sync s3://$BUCKET $DIR
 
 if [ ! -f $FILE ]; then
   printf "# $HEAD" >> $FILE
