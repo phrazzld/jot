@@ -16,7 +16,7 @@ HEAD=`date +"%Y %b %d"`
 
 NAME="phaedrusraznikov"
 BUCKET="all-the-jots-for-$NAME"
-DIR=~/Documents/jots
+DIR=~/Documents/jots/
 FILE=$DIR/$DATE.md
 
 if [ ! -d $DIR ]; then
