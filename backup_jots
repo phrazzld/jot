@@ -10,7 +10,5 @@ source ./config
 printf "\nPushing to S3...\n"
 aws s3 sync $JOT_LOCAL_DIR $JOT_S3_URL
 
-sleep 5
-
 printf "Pulling from S3...\n\n"
 aws s3 sync $JOT_S3_URL $JOT_LOCAL_DIR
