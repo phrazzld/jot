@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# aside - create timestamped log entries on the fly
-
-SUBJ=${1:-general}
+# jot
+# Make quick timestamped notes and log entries from the command line
+# Access them from any terminal (thanks Amazon S3!)
+# Author: Phaedrus
 
 BR="\n"
 BREAK="\n\n"
@@ -13,17 +14,19 @@ DATE=`date +"%Y%m%d"`
 TIME=`date +"%T"`
 HEAD=`date +"%Y %b %d"`
 
-DIR=~/Documents/logs/$SUBJ
+NAME="phaedrusraznikov"
+BUCKET="all-the-jots-for-$NAME"
+DIR=~/Documents/jots
 FILE=$DIR/$DATE.md
 
 if [ ! -d $DIR ]; then
   mkdir -p $DIR
 fi
 
+# Pull recent changes, if any
+`aws s3 sync s3://$BUCKET $DIR`
+
 if [ ! -f $FILE ]; then
-  if [ $SUBJ != "general" ]; then
-    printf "### ${SUBJ}\n" >> $FILE
-  fi
   printf "# $HEAD" >> $FILE
 fi
 
