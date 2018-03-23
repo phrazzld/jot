@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# push_pull
+# Push local entries to S3, then pull entries from S3
+# Author: Phaedrus
+
+NAME="phaedrusraznikov"
+BUCKET="all-the-jots-for-$NAME"
+DIR=~/Documents/jots/
+
+printf "\nPushing to S3...\n"
+`aws s3 sync $DIR s3://$BUCKET`
+
+sleep 5
+
+printf "Pulling from S3...\n\n"
+`aws s3 sync s3://$BUCKET $DIR`
