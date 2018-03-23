@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# setup
+# Run to set up AWS S3 and local machine for jot
+
+# Pull jot configuration
+source ./config
+
+# Install AWS CLI and dependencies via bundle
+printf "\nInstalling AWS CLI and dependencies...\n"
+curl "https://s3.amazonaws.com/awscli-bundle.zip" -o "awscli-bundle.zip"
+unzip awscli-bundle.zip
+./awscli-bundle/install -b ~/bin/aws
+
+# Set up AWS config file
+printf "\nConfiguring AWS...\n"
+echo "[default]" > $AWS_PATH/config
+echo "region = $AWS_DEFAULT_REGION" >> $AWS_PATH/config
+printf "\nAdding AWS credentials...\n"
+echo "[default]" > $AWS_PATH/credentials
+echo "aws_access_key_id = $AWS_ACCESS_KEY_ID" >> $AWS_PATH/credentials
+echo "aws_secret_access_key = $AWS_SECRET_ACCESS_KEY" >> $AWS_PATH/credentials
+
+# Make S3 bucket
+printf "\nMaking $JOT_BUCKET bucket...\n"
+aws s3 mb $JOT_S3_URL
+
+# Let the user know everything was set up successfully
+printf "\nCompleted\n\n"

@@ -1,17 +1,16 @@
 #!/bin/bash
 
-# push_pull
+# backup_jots
 # Push local entries to S3, then pull entries from S3
 # Author: Phaedrus
 
-NAME="phaedrusraznikov"
-BUCKET="all-the-jots-for-$NAME"
-DIR=~/Documents/jots/
+# Pull jot coniguration
+source ./config
 
 printf "\nPushing to S3...\n"
-aws s3 sync $DIR s3://$BUCKET
+aws s3 sync $JOT_LOCAL_DIR $JOT_S3_URL
 
 sleep 5
 
 printf "Pulling from S3...\n\n"
-aws s3 sync s3://$BUCKET $DIR
+aws s3 sync $JOT_S3_URL $JOT_LOCAL_DIR

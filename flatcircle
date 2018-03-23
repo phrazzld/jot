@@ -3,37 +3,45 @@
 # flatcircle - fetch and view past log entries
 # assumes gnome-terminal
 
-DIR=~/Documents/jots
-if [ ! -d $DIR ]; then
-  mkdir -p $DIR
+# Pull jot configuration
+source ./config
+
+if [ ! -d $JOT_LOCAL_DIR ]; then
+  mkdir -p $JOT_LOCAL_DIR
 fi
 
 YESTERDAY=`date -d "-1 day" +"%Y%m%d"`
-FILE=$DIR/$YESTERDAY.md
+FILE=$JOT_LOCAL_DIR/$YESTERDAY.md
 if [ -f $FILE ]; then
   `gnome-terminal -x less $FILE`
 fi
 
 LASTWEEK=`date -d "-1 week" +"%Y%m%d"`
-FILE=$DIR/$LASTWEEK.md
+FILE=$JOT_LOCAL_DIR/$LASTWEEK.md
 if [ -f $FILE ]; then
   `gnome-terminal -x less $FILE`
 fi
 
 LASTMONTH=`date -d "-1 month" +"%Y%m%d"`
-FILE=$DIR/$LASTMONTH.md
+FILE=$JOT_LOCAL_DIR/$LASTMONTH.md
 if [ -f $FILE ]; then
   `gnome-terminal -x less $FILE`
 fi
 
 THREEMONTHSAGO=`date -d "-3 months" +"%Y%m%d"`
-FILE=$DIR/$THREEMONTHSAGO.md
+FILE=$JOT_LOCAL_DIR/$THREEMONTHSAGO.md
+if [ -f $FILE ]; then
+  `gnome-terminal -x less $FILE`
+fi
+
+SIXMONTHSAGO=`date -d "-6 months" +"%Y%m%d"`
+FILE=$JOT_LOCAL_DIR/$SIXMONTHSAGO.md
 if [ -f $FILE ]; then
   `gnome-terminal -x less $FILE`
 fi
 
 LASTYEAR=`date -d "-1 year" +"%Y%m%d"`
-FILE=$DIR/$LASTYEAR.md
+FILE=$JOT_LOCAL_DIR/$LASTYEAR.md
 if [ -f $FILE ]; then
   `gnome-terminal -x less $FILE`
 fi
