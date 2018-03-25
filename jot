@@ -5,7 +5,7 @@
 # Access them from any terminal (thanks Amazon S3!)
 
 # Pull jot configuration
-source ./config
+source config
 
 BR="\n"
 BREAK="\n\n"
@@ -22,10 +22,6 @@ if [ ! -d $JOT_LOCAL_DIR ]; then
   mkdir -p $JOT_LOCAL_DIR
 fi
 
-# Pull recent changes, if any
-# Commented out until we solve the overwriting problem
-# aws s3 sync s3://$BUCKET $DIR
-
 if [ ! -f $FILE ]; then
   printf "# $HEAD" >> $FILE
 fi
@@ -34,4 +30,4 @@ fi
 printf "\n\n## $TIME\n\n" >> $FILE
 
 # open logfile for writing
-vi $FILE
+$JOT_EDITOR $FILE +Goyo

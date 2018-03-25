@@ -5,7 +5,13 @@
 # Author: Phaedrus
 
 # Pull jot coniguration
-source ./config
+source config
+
+# Make the bucket if it doesn't exist
+if aws s3 ls "$JOT_S3_URL" 2>&1 | grep -q 'NoSuchBucket'; then
+    printf "\nThat bucket doesn't exist yet! Making one now...\n"
+    aws s3 mb $JOT_S3_URL
+fi
 
 printf "\nPushing to S3...\n"
 aws s3 sync $JOT_LOCAL_DIR $JOT_S3_URL

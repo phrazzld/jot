@@ -5,7 +5,7 @@
 # Author: Phaedrus
 
 # Pull jot configuration
-source ./config
+source config
 
 printf "\nPulling from S3...\n"
 aws s3 sync $JOT_S3_URL $JOT_LOCAL_DIR
