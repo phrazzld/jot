@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# fetches last Friday's jot
+
+# Pull jot config
+. config
+
+if [ ! -d $JOT_LOCAL_DIR ]; then
+    mkdir -p $JOT_LOCAL_DIR
+fi
+
+last_friday=`date -d "last Friday" +"%Y%m%d"`
+file=$JOT_LOCAL_DIR/$last_friday.md
+if [ -f $file ]; then
+    $JOT_TERMINAL -x $JOT_EDITOR $file $GOYO
+fi

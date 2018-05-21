@@ -1,5 +1,5 @@
 JOT_LOCAL_DIR=~/Documents/jots
 JOT_S3_URL="s3://all-the-jots-for-phaedrusraznikov"
-JOT_EDITOR="vi"
+JOT_EDITOR="vim"
 JOT_TERMINAL="gnome-terminal"
 GOYO="+Goyo"
